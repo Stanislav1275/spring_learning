@@ -1,0 +1,4 @@
+{
+  "classes.Human": {"age":26,"name":"defaultName1", "father": { "age":6, "name": "father1"}},
+  "java.lang.String": {"value": "default1"}
+}
