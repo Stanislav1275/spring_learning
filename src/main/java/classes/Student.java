@@ -1,5 +1,6 @@
 package classes;
 
+import Annotations.newDefault;
 import classes.Human;
 import org.springframework.stereotype.Component;
 
@@ -7,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
+@newDefault(beanName = "defStudent")
 public class Student<T> {
     private String name;
     private List<T> grades = new ArrayList<>();

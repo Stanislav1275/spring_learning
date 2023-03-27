@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Lazy;
 
 @Configuration
 @ComponentScan("classes")
-@Configurable
 
 public class ColorsList {
     @Bean

@@ -13,12 +13,9 @@ import java.util.Map;
 @Component
 //@Scope("prototype")
 public class StonkCastle {
-//    @Autowired
     StonkCastle(List<StonkListenner> listeners){
         listenStonkByListener(listeners);
     }
-//    @Autowired
-//    private List<StonkListenner> listeners;
     private Map<String, Stonk> stocks = new HashMap<>();
     private Map<String, List<StonkListenner>> links = new HashMap<>();
     public void listenStonkByListener(List<StonkListenner> listeners) {

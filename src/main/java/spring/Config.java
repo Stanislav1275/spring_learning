@@ -2,10 +2,7 @@ package spring;
 
 import classes.*;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.*;
 
 import java.util.Comparator;
 import java.util.List;
@@ -45,6 +42,7 @@ public class Config {
     }
     @Bean
     Feedback sosoFeedBack(int random){
+        System.out.println(random  );
         return new Feedback("сложно сказать", random);
     }
     @Bean
@@ -60,8 +58,9 @@ public class Config {
         return new Student<Integer>("хороший студент", range, 5,4,3,5);
     }
     @Bean
+    @Lazy
     Student<Integer> getGoodSt(@Qualifier("range") Predicate<Integer> range){
-        return new Student<Integer>("хороший студент", range, 3,3,2,3);
+        return new Student<Integer>(null, range, 3,3,2,3);
     }
     @Bean
     StudentBuilder studentBuilder(){

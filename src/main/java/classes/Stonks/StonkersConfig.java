@@ -16,7 +16,7 @@ public class StonkersConfig {
     @Bean
 //    @Lazy
     public Stonker st1(){
-        Stonker st = new Stonker("st1", "s1", "s2");
+        Stonker st = new Stonker(null, "s1", "s2");
         return st;
     }
     @Bean
@@ -27,15 +27,7 @@ public class StonkersConfig {
     }
     @Bean
     @Autowired
-//    @Lazy
     public StonkCastle stonkCastle(List<StonkListenner> listeners){
-//        StonkCastle st = new StonkCastle();
-//        st.listenStonkByListener(stonkers);
         return new StonkCastle(listeners);
     }
-//    @Bean
-//    @Autowired
-//    public List<StonkListenner> stonkers(List<StonkListenner> stonkers){
-//        return stonkers;
-//    }
 }

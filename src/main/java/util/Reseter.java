@@ -1,8 +1,14 @@
+package util;
+
+;
+
+import Annotations.newDefault;
 import classes.Default;
 import com.google.gson.JsonElement;
-import com.google.gson.stream.JsonToken;
-import org.springframework.context.annotation.Bean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
+import org.springframework.util.ReflectionUtils;
 import util.Util;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -10,12 +16,12 @@ import com.google.gson.JsonParser;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
-import java.util.Arrays;
+import java.lang.reflect.Modifier;
 
 @Component
 public class Reseter {
+
     public static void reset(Object o) throws FileNotFoundException, IllegalAccessException {
         Gson gson = new Gson();
         JsonObject jsonObject;
@@ -51,12 +57,30 @@ public class Reseter {
         }
 
     }
-    public static void reset1(Object o){
-        Field[] fields = Arrays.stream(Util.getFieldCollection(o))
-                .filter(field -> field.isAnnotationPresent(Default.class)).toArray(size->new Field[size]);
+
+    public static void reset1(Object o, ApplicationContext ctx) {
+        newDefault ann;
+        Class<?> clazz = o.getClass();
+        if (clazz.isAnnotationPresent(newDefault.class)) {//ЕСЛИ ПРОАНАТАТИРОВАН КЛАСС
+        } else {
+            Field[] oFields = Util.getFieldCollection(o);
+            for (int i = 0; i < oFields.length; i++) {
+                Field oField = oFields[i];
+                try {
+                    oField.setAccessible(true);
+                    if (oField.isAnnotationPresent(newDefault.class)) {
+                        ann = oField.getAnnotation(newDefault.class);
+                        Object obj = ctx.getBean(ann.beanName());
+                        ReflectionUtils.setField(oField, o, obj);
+                    }
+                } catch (Exception e) {
+
+                }
+
+            }
+
+        }
 
 
     }
-
-
 }

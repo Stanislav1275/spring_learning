@@ -3,7 +3,7 @@ package classes.Stonks;
 import org.springframework.stereotype.Component;
 
 public class Stonker implements  StonkListenner{
-    private String name;
+    public final String name;
     private String [] stonks;
     public Stonker(String name, String ...stonks) {
         this.name = name;
