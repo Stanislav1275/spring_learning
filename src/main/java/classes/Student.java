@@ -1,5 +1,7 @@
 package classes;
 
+import Annotations.StringsVariants;
+import Annotations.ToString;
 import Annotations.newDefault;
 import classes.Human;
 import org.springframework.stereotype.Component;
@@ -8,8 +10,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
-@newDefault(beanName = "defStudent")
-public class Student<T> {
+//@newDefault(beanName = "defStudent")
+//@newDefault(beanName = "defSt")
+@ToString
+public class Student<T>{
+//    @newDefault(beanName = "studentName")
     private String name;
     private List<T> grades = new ArrayList<>();
     private Predicate<T> rule;
@@ -52,11 +57,11 @@ public class Student<T> {
         this.rule = rule;
     }
 
-    @Override
-    public String toString() {
-        return "Student{" +
-                "name='" + name + '\'' +
-                ", grades=" + grades +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "Student{" +
+//                "name='" + name + '\'' +
+//                ", grades=" + grades +
+//                '}';
+//    }
 }

@@ -22,17 +22,17 @@ public class NameControlProcessor implements BeanPostProcessor {
 
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-//        try {
-//            Field field = bean.getClass().getDeclaredField("name");
-//            field.setAccessible(true);
-//            Object val = ReflectionUtils.getField(field, bean);
-//            if (field.getType() == String.class && val == null) {
-//                field.setAccessible(true);
-//                ReflectionUtils.setField(field, bean, "vasia");
-//            }
-//        } catch (NoSuchFieldException ignored) {
+        try {
+            Field field = bean.getClass().getDeclaredField("name");
+            field.setAccessible(true);
+            Object val = ReflectionUtils.getField(field, bean);
+            if (field.getType() == String.class && val == null) {
+                field.setAccessible(true);
+                ReflectionUtils.setField(field, bean, "vasia");
+            }
+        } catch (NoSuchFieldException ignored) {
 //
-//        }
+        }
         return bean;
     }
 }

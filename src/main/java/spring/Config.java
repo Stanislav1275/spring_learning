@@ -42,7 +42,6 @@ public class Config {
     }
     @Bean
     Feedback sosoFeedBack(int random){
-        System.out.println(random  );
         return new Feedback("сложно сказать", random);
     }
     @Bean
@@ -67,5 +66,9 @@ public class Config {
         return new StudentBuilder();
     }
 
+    @Bean
+    public Shit shit() {
+        return new Shit();
+    }
 
 }

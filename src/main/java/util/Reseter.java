@@ -62,6 +62,22 @@ public class Reseter {
         newDefault ann;
         Class<?> clazz = o.getClass();
         if (clazz.isAnnotationPresent(newDefault.class)) {//ЕСЛИ ПРОАНАТАТИРОВАН КЛАСС
+            Field[] oFields = Util.getFieldCollection(o);
+            ann = clazz.getAnnotation(newDefault.class);
+            Object defObj = ctx.getBean(ann.beanName());
+            for(Field field : oFields){
+//                try{
+                    field.setAccessible(true);
+                    if(field.isAnnotationPresent(Default.class)){
+                        ann = field.getAnnotation(newDefault.class);
+                        Object obj = ctx.getBean(ann.beanName());
+                        System.out.println(obj);
+                        ReflectionUtils.setField(field, o, obj);
+                    }else{
+                        ReflectionUtils.setField(field, o, ReflectionUtils.getField(field, defObj));
+                    }
+
+            }
         } else {
             Field[] oFields = Util.getFieldCollection(o);
             for (int i = 0; i < oFields.length; i++) {
@@ -73,7 +89,7 @@ public class Reseter {
                         Object obj = ctx.getBean(ann.beanName());
                         ReflectionUtils.setField(oField, o, obj);
                     }
-                } catch (Exception e) {
+                } catch (Exception ignored) {
 
                 }
 

@@ -1,22 +1,30 @@
 package spring;
 
 import classes.*;
+import classes.PostProcessors.HumanHandler;
 import classes.Stonks.Stonk;
 import classes.Stonks.StonkCastle;
 import classes.Stonks.Stonker;
 import classes.Streaming.Changer;
+import lombok.SneakyThrows;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.GenericApplicationContext;
+import org.springframework.util.ReflectionUtils;
+
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Proxy;
 
 public class Main {
 
     public static void main(String[] args) {
         ApplicationContext ctx = new AnnotationConfigApplicationContext("spring");
 //        s_8_2_1(ctx);
-        s_8_2_2(ctx);
+//        s_8_2_2(ctx);
 //        s_8_2_3(ctx);
 //        s_8_2_4(ctx);
-//        s_8_3_1(ctx);
+        s_8_3_1(ctx);
     }
 
     public static void s_8_2_1(ApplicationContext ctx) {
@@ -59,14 +67,21 @@ public class Main {
 
 
     }
-
+    @SneakyThrows
     public static void s_8_3_1(ApplicationContext ctx) {
-        Student st = ctx.getBean("getGoodSt", Student.class);
-//        Stonker stonker = ctx.getBean("st1", Stonker.class);
-//        System.out.println(st.getName() + " student's name");
-//        System.out.println(stonker.name+ " stonker's name");
+        Object st =  ctx.getBean("getGoodSt");
+        System.out.println(st);
+//        Entity st1 = (Entity) st;
+//        System.out.println(st1);
 
+//        System.out.println(ctx.getBean("shit"));
 
+//
+//        Student st1 = (Student) Proxy.newProxyInstance(st.getClass().getClassLoader(), st.getClass().getInterfaces(),
+//                (InvocationHandler) new HumanHandler(st));
+//        System.out.println(st1.getName());//big win!
+
+        //
     }
 
 
