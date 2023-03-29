@@ -7,13 +7,19 @@ import classes.Stonks.StonkCastle;
 import classes.Stonks.Stonker;
 import classes.Streaming.Changer;
 import lombok.SneakyThrows;
+import org.springframework.cglib.proxy.Callback;
+import org.springframework.cglib.proxy.Enhancer;
+import org.springframework.cglib.proxy.FixedValue;
+import org.springframework.cglib.proxy.InvocationHandler;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.GenericApplicationContext;
+import org.springframework.objenesis.Objenesis;
+import org.springframework.objenesis.ObjenesisStd;
 import org.springframework.util.ReflectionUtils;
 
-import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
 public class Main {
@@ -69,19 +75,28 @@ public class Main {
     }
     @SneakyThrows
     public static void s_8_3_1(ApplicationContext ctx) {
-        Object st =  ctx.getBean("getGoodSt");
+        Student st =  ctx.getBean("getGoodSt", Student.class);
         System.out.println(st);
-//        Entity st1 = (Entity) st;
-//        System.out.println(st1);
-
-//        System.out.println(ctx.getBean("shit"));
-
 //
-//        Student st1 = (Student) Proxy.newProxyInstance(st.getClass().getClassLoader(), st.getClass().getInterfaces(),
-//                (InvocationHandler) new HumanHandler(st));
-//        System.out.println(st1.getName());//big win!
-
-        //
+//
+//        Cat cat =  ctx.getBean("catDef", Cat.class);
+//        Enhancer e = new Enhancer();
+//        e.setSuperclass(Cat.class);
+//        Cat finalCat = cat;
+//        e.setCallback(new InvocationHandler() {
+//            @Override
+//            public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+//                return method.invoke(finalCat, args);
+//            }
+//        });
+//        cat = (Cat) e.create(new Class[]{int.class}, new Object[]{5});
+//        System.out.println(cat.getClass().getConstructors()[0].getName());
+//        System.out.println(cat);
+        Objenesis ob = new ObjenesisStd();
+        Cat cat = ob.newInstance(Cat.class);
+        System.out.println(cat);
+//        System.out.println(st);
+//        System.out.println(cat);
     }
 
 

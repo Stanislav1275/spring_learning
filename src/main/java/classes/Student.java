@@ -4,6 +4,8 @@ import Annotations.StringsVariants;
 import Annotations.ToString;
 import Annotations.newDefault;
 import classes.Human;
+import lombok.NoArgsConstructor;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -13,12 +15,14 @@ import java.util.function.Predicate;
 //@newDefault(beanName = "defStudent")
 //@newDefault(beanName = "defSt")
 @ToString
+@NoArgsConstructor
 public class Student<T>{
 //    @newDefault(beanName = "studentName")
     private String name;
     private List<T> grades = new ArrayList<>();
     private Predicate<T> rule;
 
+    @SafeVarargs
     public Student(String name, Predicate<T> rule, T... grades) {
         setName(name);
         setRule(rule);
@@ -41,7 +45,9 @@ public class Student<T>{
         return grades;
     }
 
-    public void addGrades(T... grades) {
+
+    @SafeVarargs
+    public final void addGrades(T... grades) {
         for(T grade : grades) {
             if(rule.test(grade)){
                 this.grades.add(grade);

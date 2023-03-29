@@ -1,5 +1,6 @@
 package classes.DefaultReset;
 
+import classes.Cat;
 import classes.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -18,5 +19,9 @@ public class DefaultConfig2 {
     @Bean
     Student<Integer> defSt(){
         return new Student<>("катя", x -> x > 0 && x < 6, 5,5,5,5);
+    }
+    @Bean
+    Cat catDef(){
+      return new Cat(1);
     }
 }
