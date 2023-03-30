@@ -13,7 +13,6 @@ public class Writer {
             for (String str :data) {
                 stringBuilder.append(str + "\n");
             }
-            System.out.println(stringBuilder);
             writer.write(stringBuilder.toString());
             writer.flush();
         } catch (IOException ex) {

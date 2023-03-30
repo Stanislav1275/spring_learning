@@ -28,7 +28,7 @@ public class NameControlProcessor implements BeanPostProcessor {
             Object val = ReflectionUtils.getField(field, bean);
             if (field.getType() == String.class && val == null) {
                 field.setAccessible(true);
-                ReflectionUtils.setField(field, bean, "vasia");
+                ReflectionUtils.setField(field, bean, "катя");
             }
         } catch (NoSuchFieldException ignored) {
 //

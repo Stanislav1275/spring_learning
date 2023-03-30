@@ -1,25 +1,27 @@
 package classes;
 
-import Annotations.StringsVariants;
 import Annotations.ToString;
-import Annotations.newDefault;
-import classes.Human;
+import Annotations.Validate;
+import DefaultConfigs.StudentValidate;
 import lombok.NoArgsConstructor;
-import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 
+import java.lang.annotation.Inherited;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 //@newDefault(beanName = "defStudent")
 //@newDefault(beanName = "defSt")
-@ToString
+//@Validate(value = {"studentValidate"})
+//@ToString
 @NoArgsConstructor
 public class Student<T>{
 //    @newDefault(beanName = "studentName")
     private String name;
-    private List<T> grades = new ArrayList<>();
+    private final List<T> grades = new ArrayList<>();
     private Predicate<T> rule;
 
     @SafeVarargs
@@ -63,11 +65,5 @@ public class Student<T>{
         this.rule = rule;
     }
 
-//    @Override
-//    public String toString() {
-//        return "Student{" +
-//                "name='" + name + '\'' +
-//                ", grades=" + grades +
-//                '}';
-//    }
+
 }

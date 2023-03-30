@@ -23,7 +23,6 @@ public class Changer {
     }
     public void doActs(){
         String [] chs = new Reader().read(readFile);
-        System.out.println(Arrays.toString(chs));
         for(Writerable wr : actions){
             chs = wr.write(chs);
         }

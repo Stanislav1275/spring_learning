@@ -20,7 +20,6 @@ public class TostringProxy implements InvocationHandler {
     @Override
     @SneakyThrows
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        System.out.println(Arrays.toString(args));
         if (method.getName().equals("toString")) {
             ToString annotation = bean.getClass().getAnnotation(ToString.class);
             if (annotation != null) {
